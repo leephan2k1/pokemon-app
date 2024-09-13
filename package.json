@@ -1,0 +1,17 @@
+{
+  "name": "pokemon-app",
+  "version": "1.0.0",
+  "author": "leephan2k1 <pttl2k1@gmail.com>",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:be": "cd apps/pokemon-be && npm run dev",
+    "dev:fe": "cd apps/pokemon-fe && npm run start",
+    "dev": "concurrently \"npm run dev:be\" \"npm run dev:fe\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
