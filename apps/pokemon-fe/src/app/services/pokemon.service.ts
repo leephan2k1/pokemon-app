@@ -21,4 +21,11 @@ export class PokemonService {
       params: { page: page ? page : 1, limit: limit ? limit : 20 },
     });
   }
+
+  public importPokemonList(formData: FormData) {
+    return this.http.post<{ totalUploaded: number }>(
+      `${this.baseUrl}/pokemons/import`,
+      formData,
+    );
+  }
 }
