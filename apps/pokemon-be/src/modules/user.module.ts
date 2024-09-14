@@ -6,6 +6,8 @@ import { IUserService } from 'src/contracts/service-contracts/user-service.inter
 import { User } from 'src/models/user.model';
 import { UserRepository } from 'src/repositories/user.repository';
 import { UserService } from 'src/services/user.service';
+import { UserController } from 'src/controllers/user/user.controller';
+import { PokemonModule } from './pokemon.module';
 
 const userServiceProvider: Provider = {
   provide: IUserService,
@@ -16,7 +18,9 @@ const userRepositoryProvider: Provider = {
   useClass: UserRepository,
 };
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [TypeOrmModule.forFeature([User]), PokemonModule],
+
+  controllers: [UserController],
 
   providers: [userServiceProvider, userRepositoryProvider, UserProfile],
 
