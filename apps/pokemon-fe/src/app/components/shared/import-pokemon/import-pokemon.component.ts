@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { initFlowbite } from 'flowbite';
 import { PokemonService } from '../../../services/pokemon.service';
-import { TrackingImportPokemonService } from '../../../services/tracking-import.service';
+import { TrackingPokemonService } from '../../../services/tracking-import.service';
 
 @Component({
   selector: 'app-import-pokemon',
@@ -13,7 +13,7 @@ import { TrackingImportPokemonService } from '../../../services/tracking-import.
 export class ImportPokemonComponent implements OnInit {
   constructor(
     private readonly pokemonService: PokemonService,
-    private readonly trackingImportPokemonService: TrackingImportPokemonService,
+    private readonly trackingPokemonService: TrackingPokemonService,
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class ImportPokemonComponent implements OnInit {
 
     this.pokemonService.importPokemonList(this.formData).subscribe(
       (res) => {
-        this.trackingImportPokemonService.setTotalUploaded(res.totalUploaded);
+        this.trackingPokemonService.setTotalUploaded(res.totalUploaded);
       },
       (err) => {},
       () => {
