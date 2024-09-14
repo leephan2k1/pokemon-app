@@ -5,9 +5,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { DatabaseConfig } from './configs';
 import { envSchema } from './configs/env.schema';
+import { UserModule } from './modules/user.module';
+import { AuthModule } from './modules/auth.module';
 
 @Module({
   imports: [
+    UserModule,
+    AuthModule,
+
     AutomapperModule.forRoot({
       strategyInitializer: classes(),
     }),
@@ -33,7 +38,7 @@ import { envSchema } from './configs/env.schema';
           autoLoadEntities: true,
           migrations: ['dist/db/migrations/*.js'],
           migrationsRun: true,
-          synchronize: config.get<string>('NODE_ENV') !== 'production',
+          synchronize: false,
           logging: true,
           logger: 'simple-console',
         };
