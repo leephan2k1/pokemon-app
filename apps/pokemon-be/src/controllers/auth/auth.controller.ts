@@ -17,7 +17,10 @@ import { UserDto } from 'src/common/dtos/user.dto';
 import { ValidateInput } from 'src/common/decorators/validate-input.decorator';
 import { Response } from 'express';
 import { LoginUserRequest } from './login-user.dto';
-import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
+import {
+  JwtAuthGuard,
+  RefreshJwtAuthGuard,
+} from 'src/common/guards/jwt-auth.guard';
 import { SignOutUserRequest } from './signout-user-input.reqeust';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
 
@@ -95,5 +98,16 @@ export class AuthController {
     );
 
     return res.status(HttpStatus.OK).send(currentUserWithoutPassword);
+  }
+
+  @Get('refresh-token')
+  @UseGuards(RefreshJwtAuthGuard)
+  public async signNewTokens(
+    @CurrentUser() currentUser: User,
+    @Res() res: Response,
+  ) {
+    const authUser = await this.authService.signTokens(currentUser);
+    authUser.user = this.mapper.map(authUser.user, User, UserDto);
+    return res.status(HttpStatus.OK).send(authUser);
   }
 }
