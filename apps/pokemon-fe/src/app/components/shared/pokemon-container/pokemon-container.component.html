@@ -25,18 +25,35 @@
     </button>
   </div>
 
-  <div
-    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:max-w-[85%] mx-auto"
-  >
-    <app-pokemon-card></app-pokemon-card>
-    <app-pokemon-card></app-pokemon-card>
-    <app-pokemon-card></app-pokemon-card>
-    <app-pokemon-card></app-pokemon-card>
-    <app-pokemon-card></app-pokemon-card>
-    <app-pokemon-card></app-pokemon-card>
-    <app-pokemon-card></app-pokemon-card>
-    <app-pokemon-card></app-pokemon-card>
-    <app-pokemon-card></app-pokemon-card>
-    <app-pokemon-card></app-pokemon-card>
-  </div>
+  @if (!isFetching && pokemonList.length) {
+    <div
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:max-w-[95%] xl:max-w-[80%] mx-auto"
+    >
+      @for (pokemon of pokemonList; track pokemon.id) {
+        <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
+      }
+    </div>
+  } @else {
+    <div
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:max-w-[95%] xl:max-w-[80%] mx-auto"
+    >
+      @for (dummy of dummyList; track dummy) {
+        <div class="flex flex-col items-center animate-pulse">
+          <div
+            class="w-[12rem] hover:scale-110 transition-all my-4 bg-gray-400 rounded-2xl overflow-hidden"
+          >
+            <div
+              class="flex items-center justify-center w-[12rem] h-[13rem] rounded-2xl"
+            ></div>
+            <div class="pokemon__stats-wrapper h-[3rem]"></div>
+
+            <div class="w-full text-xl h-[2rem]"></div>
+            <div
+              class="w-[4.5rem] h-[1.6rem] px-2 p-1 text-white rounded-3xl"
+            ></div>
+          </div>
+        </div>
+      }
+    </div>
+  }
 </div>
