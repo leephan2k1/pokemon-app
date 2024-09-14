@@ -50,7 +50,7 @@ export class RefreshJwtStrategy extends PassportStrategy(
     private readonly tokenRepository: ITokenRepository,
   ) {
     super({
-      usernameField: 'email',
+      usernameField: 'username',
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
       secretOrKey: jwtConf.refreshSecret,
