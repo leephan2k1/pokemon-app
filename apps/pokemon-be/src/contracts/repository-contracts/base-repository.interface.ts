@@ -5,6 +5,7 @@ import {
   FindOneOptions,
   FindOptionsWhere,
   ObjectLiteral,
+  SaveOptions,
   UpdateResult,
 } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
@@ -16,7 +17,7 @@ export interface IBaseRepository<T> {
 
   save(data: DeepPartial<T>): Promise<T>;
 
-  saveMany(data: DeepPartial<T>[]): Promise<T[]>;
+  saveMany(data: DeepPartial<T>[], options?: SaveOptions): Promise<T[]>;
 
   findOneById(id: string | number): Promise<T | null>;
 
