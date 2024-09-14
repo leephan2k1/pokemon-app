@@ -1,0 +1,92 @@
+<div class="w-[80%] mx-auto rounded-2xl mt-4">
+  <div class="flex flex-col">
+    <h2 class="text-2xl my-2">Filter by type:</h2>
+
+    <div class="flex items-center justify-between">
+      <div class="flex flex-wrap gap-4 max-w-[65%]">
+        @for (type of pokemonTypes; track type) {
+          <button
+            (click)="handleUpdateTypeQueryParams(type)"
+            [style]="{ backgroundColor: colorByType(type) }"
+            class="w-[4.8rem] h-[1.6rem] p-2 flex items-center justify-center text-xl px-2 text-white rounded-3xl"
+          >
+            <span>{{ type }}</span>
+          </button>
+        }
+      </div>
+
+      <div class="flex flex-col w-[40%]">
+        <label
+          for="default"
+          class="block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+          >Items per page</label
+        >
+        <select
+          (change)="onItemPerPageChange($event)"
+          [(ngModel)]="limit"
+          id="default"
+          class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[40%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option value="10">10</option>
+          <option value="20" selected>20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-x-6 mt-4">
+      <div class="flex items-center mt-4">
+        <input
+          (change)="onLegendaryChange($event)"
+          [(ngModel)]="isLegendaryChecked"
+          id="default-checkbox"
+          type="checkbox"
+          value=""
+          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
+        <label
+          for="default-checkbox"
+          class="ms-2 text-2xl font-medium text-gray-900 dark:text-gray-300"
+          >Is legendary</label
+        >
+      </div>
+
+      <div>
+        <label
+          for="number-input-minSpeed"
+          class="block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+          >Select min speed:</label
+        >
+        <input
+          [(ngModel)]="minSpeed"
+          (keyup)="onMinSpeedChange()"
+          (change)="onMinSpeedChange()"
+          type="number"
+          id="number-input-minSpeed"
+          aria-describedby="helper-text-explanation"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="1"
+        />
+      </div>
+
+      <div>
+        <label
+          for="number-input-maxSpeed"
+          class="block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+          >Select max speed:</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="maxSpeed"
+          (keyup)="onMaxSpeedChange()"
+          (change)="onMaxSpeedChange()"
+          id="number-input-maxSpeed"
+          aria-describedby="helper-text-explanation"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="500"
+        />
+      </div>
+    </div>
+  </div>
+</div>
