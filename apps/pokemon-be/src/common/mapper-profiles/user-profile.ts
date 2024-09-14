@@ -2,7 +2,7 @@ import { MappingProfile } from '@automapper/core';
 import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { Injectable } from '@nestjs/common';
 import { createMap, type Mapper } from '@automapper/core';
-import { User } from 'pokemon-be/src/models/user.model';
+import { User } from 'src/models/user.model';
 import { UserDto } from '../dtos/user.dto';
 
 @Injectable()

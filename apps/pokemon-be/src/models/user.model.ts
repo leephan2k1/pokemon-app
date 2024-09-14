@@ -17,14 +17,14 @@ import { decodePassword, encodePassword } from '../utils/bcrypt';
 export class User extends BaseModel {
   @AutoMap()
   @Index({ unique: true })
-  @Column({ nullable: true })
-  userName?: string;
+  @Column({ type: 'varchar', length: 255 })
+  userName: string;
 
   @AutoMap()
   @IsEmail()
   @Index({ unique: true })
-  @Column({ type: 'varchar', length: 255 })
-  email: string;
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  email?: string;
 
   @Column({ type: 'varchar', length: 255 })
   @MinLength(6)

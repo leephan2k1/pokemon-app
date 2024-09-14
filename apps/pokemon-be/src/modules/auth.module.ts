@@ -11,6 +11,7 @@ import { ITokenRepository } from 'src/contracts/repository-contracts/token-repos
 import { TokenRepository } from 'src/repositories/token.repository';
 import { UserModule } from './user.module';
 import { JwtStrategy, RefreshJwtStrategy } from 'src/strategies/jwt.strategy';
+import { AuthController } from 'src/controllers/auth/auth.controller';
 
 const tokenRepositoryProvider: Provider = {
   provide: ITokenRepository,
@@ -42,6 +43,8 @@ const authServiceProvider: Provider = {
 
     TypeOrmModule.forFeature([Token]),
   ],
+
+  controllers: [AuthController],
 
   providers: [
     JwtStrategy,

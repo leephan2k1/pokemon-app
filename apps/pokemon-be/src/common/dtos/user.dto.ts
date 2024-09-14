@@ -4,11 +4,11 @@ import { BaseDto } from './base-dto';
 
 export class UserDto extends BaseDto {
   @AutoMap()
-  userName?: string;
+  userName: string;
 
   @AutoMap()
   @IsEmail()
-  email: string;
+  email?: string;
 
   @AutoMap()
   displayName?: string;

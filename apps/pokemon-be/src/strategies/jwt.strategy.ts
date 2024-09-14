@@ -19,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, AuthTypes.JWT) {
     private readonly userService: IUserService,
   ) {
     super({
-      usernameField: 'email',
+      usernameField: 'username',
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
       secretOrKey: jwtConf.secret,
@@ -28,7 +28,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, AuthTypes.JWT) {
 
   async validate(payload: any, done: VerifiedCallback) {
     const user = await this.userService.getUserByConditions({
-      email: payload.email,
+      userName: payload.username,
     });
     if (!user) {
       return done(new UnauthorizedException(), false);
