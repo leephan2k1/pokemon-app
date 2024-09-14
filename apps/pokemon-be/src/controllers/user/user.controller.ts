@@ -2,6 +2,7 @@ import { InjectMapper } from '@automapper/nestjs';
 import {
   Body,
   Controller,
+  Get,
   HttpStatus,
   Inject,
   Post,
@@ -45,5 +46,16 @@ export class UserController {
     }
 
     return res.status(HttpStatus.OK).send(updatedFavoriteUser.value);
+  }
+
+  @Get('favorite')
+  @UseGuards(JwtAuthGuard)
+  public async getFavoritePokemonList(
+    @Res() res: Response,
+    @CurrentUser() currentUser: User,
+  ) {
+    const result = await this.userService.getFavoritePokemonList(currentUser);
+
+    return res.status(HttpStatus.OK).send(result);
   }
 }
