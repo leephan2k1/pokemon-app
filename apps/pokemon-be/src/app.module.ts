@@ -33,7 +33,7 @@ import { envSchema } from './configs/env.schema';
           autoLoadEntities: true,
           migrations: ['dist/db/migrations/*.js'],
           migrationsRun: true,
-          synchronize: config.get<string>('NODE_ENV') !== 'production',
+          synchronize: false,
           logging: true,
           logger: 'simple-console',
         };

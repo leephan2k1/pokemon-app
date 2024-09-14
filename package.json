@@ -13,9 +13,5 @@
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
-  },
-  "dependencies": {
-    "@automapper/classes": "^8.8.1",
-    "@automapper/nestjs": "^8.8.1"
   }
 }

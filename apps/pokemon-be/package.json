@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "ts-node --require tsconfig-paths/register ./node_modules/typeorm/cli",
+    "typeorm": "ts-node --project ./tsconfig.json --require tsconfig-paths/register ../../node_modules/typeorm/cli",
     "migration:run": "yarn run typeorm migration:run -d ./db/typeorm.config.ts",
     "migration:generate": "yarn run typeorm -d ./db/typeorm.config.ts migration:generate",
     "migration:create": "yarn run typeorm migration:create",
@@ -26,6 +26,8 @@
     "migration:show": "yarn run typeorm migration:show -d ./db/typeorm.config.ts"
   },
   "dependencies": {
+    "@automapper/classes": "^8.8.1",
+    "@automapper/nestjs": "^8.8.1",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.2.3",
     "@nestjs/core": "^10.0.0",
