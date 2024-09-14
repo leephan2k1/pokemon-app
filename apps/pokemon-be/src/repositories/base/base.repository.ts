@@ -8,6 +8,7 @@ import {
   DeleteResult,
   UpdateResult,
   ObjectLiteral,
+  SaveOptions,
 } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
@@ -28,8 +29,11 @@ export abstract class BaseRepository<T extends HasId>
     return await this.entity.save(data);
   }
 
-  public async saveMany(data: DeepPartial<T>[]): Promise<T[]> {
-    return await this.entity.save(data);
+  public async saveMany(
+    data: DeepPartial<T>[],
+    options?: SaveOptions,
+  ): Promise<T[]> {
+    return await this.entity.save(data, options);
   }
 
   public create(data: DeepPartial<T>): T {
