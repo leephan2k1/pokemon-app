@@ -12,7 +12,7 @@ import {
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 interface HasId {
-  id: string;
+  id: string | number;
 }
 
 export abstract class BaseRepository<T extends HasId>

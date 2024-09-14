@@ -5,6 +5,8 @@ import {
   Entity,
   Index,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   OneToMany,
 } from 'typeorm';
 import { BaseModel } from './base/base.model';
@@ -12,6 +14,7 @@ import { AutoMap } from '@automapper/classes';
 import { IsEmail, MinLength } from 'class-validator';
 import { Token } from './token.model';
 import { decodePassword, encodePassword } from '../utils/bcrypt';
+import { Pokemon } from './pokemon.model';
 
 @Entity({ name: 'users' })
 export class User extends BaseModel {
@@ -29,6 +32,11 @@ export class User extends BaseModel {
   @Column({ type: 'varchar', length: 255 })
   @MinLength(6)
   password: string;
+
+  @AutoMap(() => [Pokemon])
+  @ManyToMany(() => Pokemon)
+  @JoinTable()
+  favoritePokemons: Pokemon[];
 
   @AutoMap(() => [Token])
   @OneToMany(() => Token, (token) => token.user)
