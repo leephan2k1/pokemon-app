@@ -5,9 +5,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { DatabaseConfig } from './configs';
 import { envSchema } from './configs/env.schema';
+import { UserModule } from './modules/user.module';
+import { AuthModule } from './modules/auth.module';
 
 @Module({
   imports: [
+    UserModule,
+    AuthModule,
+
     AutomapperModule.forRoot({
       strategyInitializer: classes(),
     }),
