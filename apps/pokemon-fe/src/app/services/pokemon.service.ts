@@ -13,12 +13,17 @@ export class PokemonService {
   private readonly baseUrl = environment.BASE_URL;
   constructor(private readonly http: HttpClient) {}
 
-  public getPokemonList({
-    page,
-    limit,
-  }: Partial<PokemonQueries>): Observable<ApiListResponse<Pokemon>> {
+  public getPokemonList(
+    pokemonQueries: Partial<PokemonQueries>,
+  ): Observable<ApiListResponse<Pokemon>> {
+    const { page, limit } = pokemonQueries;
+
     return this.http.get<ApiListResponse<Pokemon>>(`${this.baseUrl}/pokemons`, {
-      params: { page: page ? page : 1, limit: limit ? limit : 20 },
+      params: {
+        page: page ? page : 1,
+        limit: limit ? limit : 20,
+        ...pokemonQueries,
+      },
     });
   }
 

@@ -10,7 +10,7 @@ import { PokemonQueries } from '../../../dtos/queries-pokemon.dto';
 import { PokemonService } from '../../../services/pokemon.service';
 import { Pokemon } from '../../../models/pokemon';
 import { RouterModule } from '@angular/router';
-import { TrackingImportPokemonService } from '../../../services/tracking-import.service';
+import { TrackingPokemonService } from '../../../services/tracking-import.service';
 
 @Component({
   selector: 'app-pokemon-container',
@@ -22,10 +22,11 @@ import { TrackingImportPokemonService } from '../../../services/tracking-import.
 export class PokemonContainerComponent implements OnChanges, OnInit {
   constructor(
     private readonly pokemonService: PokemonService,
-    private readonly trackingImportPokemonService: TrackingImportPokemonService,
+    private readonly trackingPokemonService: TrackingPokemonService,
   ) {}
 
-  @Input() pokemonQueries: Partial<PokemonQueries> = {};
+  @Input() pokemonQueries: Partial<PokemonQueries> = { page: 1, limit: 20 };
+  @Input() isHomePage = false;
 
   dummyList: Array<number> = Array.from(new Array(10).keys());
   pokemonList: Pokemon[] = [];
@@ -33,10 +34,16 @@ export class PokemonContainerComponent implements OnChanges, OnInit {
   isEmpty = false;
 
   ngOnInit(): void {
-    this.trackingImportPokemonService.totalUploaded$.subscribe((total) => {
+    this.trackingPokemonService.totalUploaded$.subscribe((total) => {
       if (total !== 0) {
         this.fetchPokemonList();
       }
+    });
+
+    this.trackingPokemonService.searchText$.subscribe((searchText) => {
+      if (this.isHomePage) return;
+      this.pokemonQueries = { ...this.pokemonQueries, name: searchText };
+      this.fetchPokemonList();
     });
   }
 

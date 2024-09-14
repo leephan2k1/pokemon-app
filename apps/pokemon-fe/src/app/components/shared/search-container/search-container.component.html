@@ -2,6 +2,8 @@
   <div class="p-4 w-[20rem] mx-auto">
     <input
       type="text"
+      [(ngModel)]="inputText"
+      (input)="onSearch()"
       class="w-full rounded-xl"
       maxlength="256"
       name="name"
