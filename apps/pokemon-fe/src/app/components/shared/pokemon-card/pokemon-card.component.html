@@ -1,0 +1,26 @@
+<div class="flex flex-col items-center">
+  <div class="w-[12rem] hover:scale-110 transition-all my-4">
+    <div
+      class="flex items-center justify-center w-[12rem] h-[13rem] bg-[#d9d9d9] rounded-2xl"
+    >
+      <img
+        class="w-full h-full"
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+        loading="lazy"
+      />
+    </div>
+    @if (isShowStatus) {
+      <div class="pokemon__stats-wrapper">
+        <div class="pokemon__id">#001</div>
+        <div class="pokemon__exp">EXP: 64</div>
+      </div>
+    }
+
+    <div class="w-full text-xl">Bulbasaur</div>
+    <div
+      class="w-[4.5rem] h-[1.6rem] flex items-center justify-center text-sm bg-green-500 px-2 p-1 text-white rounded-3xl"
+    >
+      <span>Grass</span>
+    </div>
+  </div>
+</div>
