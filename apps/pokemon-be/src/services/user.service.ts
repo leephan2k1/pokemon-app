@@ -81,4 +81,16 @@ export class UserService implements IUserService {
 
     return either.of(new FavoritePokemonResponse({ status: 'success' }));
   }
+
+  public async getFavoritePokemonList(currentUser: User) {
+    const users = await this.usersRepository.findWithRelations({
+      where: { id: currentUser.id },
+      relations: {
+        favoritePokemons: true,
+      },
+    });
+    const user = users[0];
+
+    return user.favoritePokemons;
+  }
 }
