@@ -1,8 +1,12 @@
 <div class="w-full h-fit space-y-6">
   <app-search-container></app-search-container>
 
+  <app-advanced-search></app-advanced-search>
+
   <app-pokemon-container
     [isHomePage]="false"
     [pokemonQueries]="{ limit: 20, page: 1 }"
   ></app-pokemon-container>
+
+  <app-pagination></app-pagination>
 </div>

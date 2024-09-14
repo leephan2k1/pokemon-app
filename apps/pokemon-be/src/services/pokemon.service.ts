@@ -89,8 +89,11 @@ export class PokemonService implements IPokemonService {
     let { isLegendary, limit, maxSpeed, minSpeed, name, page, type } = queries;
     const _limit = +limit;
     const _page = +page;
-    minSpeed = +minSpeed;
-    maxSpeed = +maxSpeed;
+    minSpeed = isNaN(+minSpeed) ? undefined : +minSpeed;
+    maxSpeed = isNaN(+maxSpeed) ? undefined : +maxSpeed;
+
+    if (`${isLegendary}`.includes('false')) isLegendary = false;
+    if (`${isLegendary}`.includes('true')) isLegendary = true;
 
     const [data, count] = await this.pokemonRepository.findAndCount({
       where: {
@@ -116,7 +119,7 @@ export class PokemonService implements IPokemonService {
     const pageInfo = new PageInfo({
       total: count,
       currentPage: _page,
-      hasNextPage: _page < _limit,
+      hasNextPage: _page < lastPage,
       lastPage,
       perPage: _limit,
     });
