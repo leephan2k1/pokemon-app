@@ -1,0 +1,45 @@
+services:
+  postgresql_db:
+    image: postgres:16.4-alpine
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+    environment:
+      - POSTGRES_DB=pokemon-db
+      - POSTGRES_PASSWORD=postgres
+
+  pokemon-be:
+    build:
+      context: ./apps/pokemon-be
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    env_file:
+      - ./apps/pokemon-be/.env
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+    volumes:
+      - ./apps/pokemon-be:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - postgresql_db
+
+  pokemon-fe:
+    build:
+      context: ./apps/pokemon-fe
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./apps/pokemon-fe:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: ng serve --host 0.0.0.0
+
+volumes:
+  postgresql_data:
+    driver: local
