@@ -48,5 +48,9 @@
     ></app-pokemon-card>
   </div>
 
-  <div *nzModalFooter></div>
+  <div *nzModalFooter>
+    @if (isAuth) {
+      <app-favorite-button [pokemon]="currentPokemon"></app-favorite-button>
+    }
+  </div>
 </nz-modal>
