@@ -1,5 +1,19 @@
 ## Setup and running instructions
 
+_A successfully built project will run on the default ports for each project: port 4200 for Angular and port 3000 for NestJS, if you don't have any special configuration needs._
+
+### Docket Setup
+
+If you are using Docker, let everything be automated by building the image and running the container with the following command:
+
+```
+docker-compose -f docker-compose.yml up --build
+```
+
+NOTE: The build process will separate the node_modules for each project. If you encounter an error, try going back one level in the incorrect paths.
+
+### Manual Setup
+
 Currently, I am using [Node version 20.14](https://nodejs.org/en/download/package-manager) and [PostgreSQL](https://www.postgresql.org/download/) database version 16. You can install them beforehand if you don’t have them already.
 
 1. Clone this repo
