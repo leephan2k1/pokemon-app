@@ -2,7 +2,7 @@
 
 _A successfully built project will run on the default ports for each project: port 4200 for Angular and port 3000 for NestJS, if you don't have any special configuration needs._
 
-### Docket Setup
+### Docker Setup
 
 If you are using Docker, let everything be automated by building the image and running the container with the following command:
 
