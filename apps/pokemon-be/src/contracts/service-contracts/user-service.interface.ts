@@ -1,5 +1,6 @@
 import { FavoritePokemonRequest } from 'src/controllers/user/favorite-pokemon.request';
 import { FavoritePokemonResponse } from 'src/controllers/user/favorite-pokemon.response';
+import { Pokemon } from 'src/models/pokemon.model';
 import { User } from 'src/models/user.model';
 import { Either } from 'src/utils/either';
 
@@ -9,6 +10,8 @@ export interface IUserService {
   existsByCredentials(user: Pick<User, 'email' | 'userName'>): Promise<boolean>;
 
   createUser(user: Partial<User>): Promise<Omit<User, 'password'>>;
+
+  getFavoritePokemonList(currentUser: User): Promise<Pokemon[]>;
 
   toggleFavoritePokemon(
     reqBody: FavoritePokemonRequest,

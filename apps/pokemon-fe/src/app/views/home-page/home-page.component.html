@@ -1,0 +1,39 @@
+<div class="w-full h-fit space-y-6">
+  <section class="lg:h-[15%] w-full md:w-3/4 mx-auto">
+    <app-hero-carousel></app-hero-carousel>
+  </section>
+
+  <section>
+    <div class="flex space-x-4 w-full mx-auto items-center justify-center">
+      <h2 class="text-3xl font-semibold text-center my-4">Top 10 Pokemon!</h2>
+
+      <a routerLink="/browse">
+        <button
+          type="button"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          See more
+          <svg
+            class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 5h12m0 0L9 1m4 4L9 9"
+            />
+          </svg>
+        </button>
+      </a>
+    </div>
+  </section>
+  <app-pokemon-container
+    [pokemonQueries]="{ limit: 10, page: 1 }"
+    [isHomePage]="true"
+  ></app-pokemon-container>
+</div>

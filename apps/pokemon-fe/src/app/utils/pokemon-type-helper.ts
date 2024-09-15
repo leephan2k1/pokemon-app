@@ -1,0 +1,33 @@
+export const mapTypeColor: Record<string, string> = {
+  normal: '#d9d9d9',
+  grass: '#47ab57',
+  fire: '#fd7d24',
+  water: '#4592c4',
+  bug: '#719f3f',
+  electric: '#eed535',
+  rock: '#a38c21',
+  ghost: '#7b62a3',
+  poison: '#b97fc9',
+  psychic: '#b97fc9',
+  fighting: '#d56723',
+  ground: '#ab9842',
+  dragon: '#f06d56',
+  dark: '#000000',
+};
+
+export const pokemonTypes = [
+  'Normal',
+  'Grass',
+  'Fire',
+  'Water',
+  'Bug',
+  'Electric',
+  'Rock',
+  'Ghost',
+  'Poison',
+  'Psychic',
+  'Fighting',
+  'Ground',
+  'Dragon',
+  'Dark',
+];

@@ -10,13 +10,11 @@ import {
   Query,
   Res,
   UploadedFile,
-  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { PokemonDto } from 'src/common/dtos/pokemon.dto';
-import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 import { IPokemonService } from 'src/contracts/service-contracts/pokemon-service.interface';
 import { Pokemon } from 'src/models/pokemon.model';
 import { GetPokemonQueries } from './get-pokemon-list.request';
@@ -32,7 +30,6 @@ export class PokemonController {
   ) {}
 
   @Post('import')
-  @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
   public async uploadFile(
     @Res() res: Response,
@@ -48,7 +45,6 @@ export class PokemonController {
   }
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard)
   public async getPokemonDetails(
     @Param('id') id: string,
     @Res() res: Response,
@@ -70,7 +66,6 @@ export class PokemonController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
   public async getPokemonListOnDemand(
     @Res() res: Response,
     @Query() queries: GetPokemonQueries,
