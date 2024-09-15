@@ -12,11 +12,18 @@ import { Pokemon } from '../../../models/pokemon';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TrackingPokemonService } from '../../../services/tracking-import.service';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { FavoriteButtonComponent } from '../favorite-button/favorite-button.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-pokemon-container',
   standalone: true,
-  imports: [PokemonCardComponent, RouterModule, NzModalModule],
+  imports: [
+    PokemonCardComponent,
+    RouterModule,
+    NzModalModule,
+    FavoriteButtonComponent,
+  ],
   templateUrl: './pokemon-container.component.html',
   styleUrl: './pokemon-container.component.scss',
 })
@@ -25,6 +32,7 @@ export class PokemonContainerComponent implements OnChanges, OnInit {
     private readonly pokemonService: PokemonService,
     private readonly trackingPokemonService: TrackingPokemonService,
     private readonly route: ActivatedRoute,
+    private readonly authService: AuthService,
   ) {}
 
   @Input() pokemonQueries: Partial<PokemonQueries> = { page: 1, limit: 20 };
@@ -37,6 +45,7 @@ export class PokemonContainerComponent implements OnChanges, OnInit {
   isEmpty = false;
   isVisible = false;
   isOkLoading = false;
+  isAuth = false;
 
   ngOnInit(): void {
     this.trackingPokemonService.totalUploaded$.subscribe((total) => {
@@ -49,6 +58,14 @@ export class PokemonContainerComponent implements OnChanges, OnInit {
       if (this.isHomePage) return;
       this.pokemonQueries = { ...this.pokemonQueries, name: searchText };
       this.fetchPokemonList();
+    });
+
+    this.authService.currentUser.subscribe((user) => {
+      if (user && user.id) {
+        this.isAuth = true;
+      } else {
+        this.isAuth = false;
+      }
     });
 
     this.onPageChange();
