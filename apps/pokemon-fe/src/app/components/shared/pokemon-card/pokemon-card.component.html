@@ -6,9 +6,18 @@
       <img class="w-full h-full" [src]="pokemon?.image" loading="lazy" />
     </div>
     @if (isShowStatus) {
-      <div class="pokemon__stats-wrapper">
-        <div class="pokemon__id"># {{ pokemon?.id }}</div>
-        <div class="pokemon__exp">Hp: {{ pokemon?.hp }}</div>
+      <div class="text-lg">
+        <div># {{ pokemon?.id }}</div>
+        <div>Hp: {{ pokemon?.hp }}</div>
+      </div>
+    }
+
+    @if (isShowDetails) {
+      <div class="text-lg">
+        <div>attack: {{ pokemon?.attack }}</div>
+        <div>defense: {{ pokemon?.defense }}</div>
+        <div>speed: {{ pokemon?.speed }}</div>
+        <div>isLegendary: {{ pokemon?.isLegendary }}</div>
       </div>
     }
 

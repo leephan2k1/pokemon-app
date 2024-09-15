@@ -11,11 +11,12 @@ import { PokemonService } from '../../../services/pokemon.service';
 import { Pokemon } from '../../../models/pokemon';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TrackingPokemonService } from '../../../services/tracking-import.service';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-pokemon-container',
   standalone: true,
-  imports: [PokemonCardComponent, RouterModule],
+  imports: [PokemonCardComponent, RouterModule, NzModalModule],
   templateUrl: './pokemon-container.component.html',
   styleUrl: './pokemon-container.component.scss',
 })
@@ -31,8 +32,11 @@ export class PokemonContainerComponent implements OnChanges, OnInit {
 
   dummyList: Array<number> = Array.from(new Array(10).keys());
   pokemonList: Pokemon[] = [];
+  currentPokemon: Pokemon = {} as Pokemon;
   isFetching: boolean = false;
   isEmpty = false;
+  isVisible = false;
+  isOkLoading = false;
 
   ngOnInit(): void {
     this.trackingPokemonService.totalUploaded$.subscribe((total) => {
@@ -48,6 +52,19 @@ export class PokemonContainerComponent implements OnChanges, OnInit {
     });
 
     this.onPageChange();
+  }
+
+  showModal(currentPokemon: Pokemon): void {
+    this.currentPokemon = currentPokemon;
+    this.isVisible = true;
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
+  }
+
+  handleOk(): void {
+    this.isVisible = false;
   }
 
   private onPageChange() {

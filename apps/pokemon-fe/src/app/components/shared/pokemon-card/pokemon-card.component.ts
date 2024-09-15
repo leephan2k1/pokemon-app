@@ -10,6 +10,7 @@ import { Pokemon } from '../../../models/pokemon';
 })
 export class PokemonCardComponent {
   @Input() isShowStatus = false;
+  @Input() isShowDetails = false;
   @Input() pokemon?: Pokemon;
 
   readonly mapTypeColor: Record<string, string> = {

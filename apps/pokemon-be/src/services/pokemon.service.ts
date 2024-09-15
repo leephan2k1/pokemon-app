@@ -92,12 +92,9 @@ export class PokemonService implements IPokemonService {
     minSpeed = isNaN(+minSpeed) ? undefined : +minSpeed;
     maxSpeed = isNaN(+maxSpeed) ? undefined : +maxSpeed;
 
-    if (`${isLegendary}`.includes('false')) isLegendary = false;
-    if (`${isLegendary}`.includes('true')) isLegendary = true;
-
     const [data, count] = await this.pokemonRepository.findAndCount({
       where: {
-        isLegendary,
+        isLegendary: `${isLegendary}`.includes('true'),
         speed: minSpeed && maxSpeed ? Between(minSpeed, maxSpeed) : undefined,
         name: name ? ILike(`%${name}%`) : undefined,
         type1: type,
