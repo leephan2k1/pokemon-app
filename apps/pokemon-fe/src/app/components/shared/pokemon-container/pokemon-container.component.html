@@ -4,7 +4,9 @@
       class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:max-w-[95%] xl:max-w-[80%] mx-auto"
     >
       @for (pokemon of pokemonList; track pokemon.id) {
-        <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
+        <button (click)="showModal(pokemon)">
+          <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
+        </button>
       }
     </div>
   } @else if (!isEmpty) {
@@ -31,3 +33,20 @@
     </div>
   }
 </div>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  class="text-2xl"
+>
+  <div *nzModalContent class="h-[30rem] mt-6 text-2xl">
+    <app-pokemon-card
+      [isShowStatus]="true"
+      [isShowDetails]="true"
+      [pokemon]="currentPokemon"
+    ></app-pokemon-card>
+  </div>
+
+  <div *nzModalFooter></div>
+</nz-modal>
